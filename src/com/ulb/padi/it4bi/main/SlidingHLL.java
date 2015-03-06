@@ -21,6 +21,14 @@ public class SlidingHLL {
 	private double currentSum = 0;
 	private int nonZeroBuckets = 0;
 
+	public ArrayList<ElementList> getBuckets() {
+		return buckets;
+	}
+
+	public void setBuckets(ArrayList<ElementList> buckets) {
+		this.buckets = buckets;
+	}
+
 	public SlidingHLL(int numberOfBuckets) {
 		Preconditions.checkArgument(Numbers.isPowerOf2(numberOfBuckets),
 				"numberOfBuckets must be a power of 2");

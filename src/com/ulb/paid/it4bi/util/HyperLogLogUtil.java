@@ -4,7 +4,9 @@ import com.google.common.base.Charsets;
 import com.google.common.base.Preconditions;
 import com.google.common.hash.HashFunction;
 import com.google.common.hash.Hashing;
+import com.ulb.padi.it4bi.main.SlidingHLL;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -103,7 +105,24 @@ public class HyperLogLogUtil {
 
     return result;
   }
+  public static  ArrayList<ElementList> mergeBuckets( ArrayList<ElementList> first,  ArrayList<ElementList> second) {
+	    checkNotNull(first, "first is null");
+	    checkNotNull(second, "second is null");
+	    checkArgument(
+	      first.size() == second.size(),
+	      "Array sizes must match, found %s vs %s",
+	      first.size(),
+	      second.size()
+	    );
 
+	    ArrayList<ElementList> result=new ArrayList<ElementList>();
+	    for (int i = 0; i < first.size(); i++) {
+	    
+	      result.add(null);
+	    }
+
+	    return result;
+	  }
   public static double computeAlpha(int numberOfBuckets) {
     double alpha;
     switch (numberOfBuckets) {
@@ -122,6 +141,19 @@ public class HyperLogLogUtil {
     return alpha;
   }
 
+  
+  public static SlidingHLL mergeHLL(SlidingHLL first,SlidingHLL second){
+	  
+	  SlidingHLL out=new SlidingHLL(first.getBuckets().size());
+	  ArrayList<ElementList> outList=out.getBuckets();
+	  
+	  for(ElementList e : outList){
+		  
+	  }
+	  
+	  return out;
+	  
+  }
   /**
    * Computes a 64-bit hash suitable for adding to a hyperloglog instance.
    *
